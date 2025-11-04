@@ -20,7 +20,21 @@ class UserAdminController extends Controller
     public function index()
     {
         return $this->successResponse(
-            User::with(['roles:name', 'group:id,name'])->get()
+            User::with(['roles:name', 'group:id,name'])
+                ->withSum('files as storage_used', 'size')
+                ->get()
+                ->map(function ($user) {
+                    return [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'group_id' => $user->group_id,
+                        'group' => $user->group,
+                        'quota' => $user->quota,
+                        'storage_used' => $user->storage_used ?? 0,
+                        'roles' => $user->roles
+                    ];
+                })
         );
     }
 

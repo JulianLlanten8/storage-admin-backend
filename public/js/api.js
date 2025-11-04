@@ -1,4 +1,3 @@
-// api.js - Versión corregida para tu estructura de API
 class ApiService {
     static baseURL = '/api';
 
@@ -28,12 +27,12 @@ class ApiService {
 
             const result = await response.json();
             
-            // Tu API siempre retorna { data, message, error }
+            // siempre retorna { data, message, error }
             return {
                 success: response.ok,
-                data: result.data,       // Los datos van aquí
-                message: result.message, // Mensaje de la API
-                error: result.error,     // Error si existe
+                data: result.data,      
+                message: result.message,
+                error: result.error,    
                 status: response.status
             };
         } catch (error) {
@@ -185,10 +184,10 @@ class ApiService {
         return await this.request('/admin/forbidden-extensions');
     }
 
-    static async addForbiddenExtension(extension) {
+    static async createForbiddenExtension(extensionData) {
         return await this.request('/admin/forbidden-extensions', {
             method: 'POST',
-            body: JSON.stringify({ extension })
+            body: JSON.stringify(extensionData)
         });
     }
 
@@ -202,24 +201,24 @@ class ApiService {
         return await this.request('/admin/quota/global');
     }
 
-    static async setGlobalQuota(quota) {
+    static async setGlobalQuota(quota_mb) {
         return await this.request('/admin/quota/global', {
             method: 'PUT',
-            body: JSON.stringify({ quota })
+            body: JSON.stringify({ quota_mb })
         });
     }
 
-    static async setGroupQuota(groupId, quota) {
+    static async setGroupQuota(groupId, quota_mb) {
         return await this.request(`/admin/quota/group/${groupId}`, {
             method: 'PUT',
-            body: JSON.stringify({ quota })
+            body: JSON.stringify({ quota_mb })
         });
     }
 
-    static async setUserQuota(userId, quota) {
+    static async setUserQuota(userId, quota_mb) {
         return await this.request(`/admin/quota/user/${userId}`, {
             method: 'PUT',
-            body: JSON.stringify({ quota })
+            body: JSON.stringify({ quota_mb })
         });
     }
 }
