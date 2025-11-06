@@ -140,7 +140,7 @@ Ubicadas en la carpeta `/docs`:
 ## 🧰 Tecnologías usadas
 
 * **PHP 8.3 + Laravel 12**
-* **MySQL**
+* **PostgreSQL**
 * **Vanilla JS (ES6)** + Fetch API
 * **TailwindCSS** (solo para estilos base)
 * **Laravel Sanctum** (autenticación)
